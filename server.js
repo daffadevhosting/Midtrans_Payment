@@ -33,4 +33,8 @@ app.get("/", (req, res) => {
     res.send("Welcome to the Midtrans Payment API");
 });
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 module.exports = app;
