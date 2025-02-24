@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Midtrans</title>
+    <script type="text/javascript"
+        src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="YOUR_CLIENT_KEY"></script>
+</head>
+<body>
+    <h2>Checkout</h2>
+    <button id="pay-button">Bayar Sekarang</button>
+
+    <script>
+        document.getElementById('pay-button').addEventListener('click', function () {
+            fetch('/api/token', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: 100000 })
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.snap.pay(data.token);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
